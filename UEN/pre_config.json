@@ -1,0 +1,39 @@
+{
+    "DATA": {
+        "dataset": "act",
+        "data_dir": "/scratch/po21/jz1585/Label_noise/Data/",
+        "train_dir": "act_solar_f1881+b1524+t190/train/fore/",
+        "cam_dir": "/scratch/po21/jz1585/Label_noise/Data/act_solar_f1881+b1524+t190/train_label/conv4_3/",
+        "val_dir": "act_solar_f1881+b1524+t190/validation/",
+        "test_dir": "act_solar_f1881+b1524+t190/test/",
+        "test_gt": "/scratch/po21/jz1585/Label_noise/Data/act_solar_f1881+b1524+t190/test-gt/",
+        "image_size": 256
+    },
+    "MODEL": {
+        "model_name": "RAN",
+        "checkpoint_path": "None"
+    },
+    "TRAIN": {
+        "batch_size": 8,
+        "lr": 0.001,
+        "rgb": 1000,
+        "xy": 6,
+        "weight": 0.9,
+        "momentum": 0.09,
+        "weight_decay": 0.0001,
+        "lr_decay": 0.8,
+        "epoch_num": 500,
+        "save_frequence": 10,
+        "GPU": 0,
+        "log_interval": 20,
+        "crf_w": 0.005
+    },
+    "VAL": {
+        "val_interval": 1,
+        "save_dir": "./result/act/20220518110530/test"
+    },
+    "TEST": {
+        "model_path": "./checkpoint/act/20220518153347",
+        "save_dir": "./result/act/20220518153347/train"
+    }
+}
