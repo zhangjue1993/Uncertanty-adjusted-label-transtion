@@ -1,12 +1,12 @@
 {
     "DATA": {
         "dataset": "act",
-        "data_dir": "C:/Jue/Project/Data/act_solar_f1881+b1524+t190_1/",
-        "train_dir": "train/fore/",
-        "cam_dir": "train_label/conv4_3/",
-        "val_dir": "test/",
-        "test_dir": "test/",
-        "test_gt": "test-gt/",
+        "data_dir": "",
+        "train_dir": "",
+        "cam_dir": "",
+        "val_dir": "",
+        "test_dir": "",
+        "test_gt": "",
         "image_size": 256
     },
     "MODEL": {
