@@ -1,14 +1,14 @@
 {
     "DATA": {
         "dataset": "act",
-        "data_dir": "C:/Jue/Project/Data/act_solar_f1881+b1524+t190_1/",
+        "data_dir": "",
         "train_dir": "train/fore/",
         "cam_dir": "train_label/conv4_3/",
         "val_dir": "test/",
         "test_dir": "test/",
         "test_gt": "test-gt/",
-        "bayes_optimal_label": "C:/Jue/Project/Label_noise_ACT/Un/result/act/20220822220542/train/y/",
-        "train_sigma_dir": "C:/Jue/Project/Label_noise_ACT/Un/result/act/20220822220542/train/mask/",
+        "bayes_optimal_label": "",
+        "train_sigma_dir": "",
         "image_size": 256
     },
     "MODEL": {
@@ -30,7 +30,7 @@
         "weight": 0.2,
         "sigma_th": 0.001,
         "Resume": 0,
-        "Path": "C:/Jue/Project/Label_noise_Bris/Un/checkpoint/bris/20220822220542/best-model_epoch-090_mae-inf.pth"
+        "Path": "C:"
     },
     "VAL": {
         "val_interval": 1,
