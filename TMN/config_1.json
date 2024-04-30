@@ -1,12 +1,12 @@
 {
     "DATA": {
         "dataset": "act",
-        "data_dir": "/scratch/po21/jz1585/Label_noise/Data/",
-        "train_dir": "act_solar_f1881+b1524+t190/train/fore/",
-        "cam_dir": "/scratch/po21/jz1585/Label_noise/Data/act_solar_f1881+b1524+t190/train_label/conv4_3/",
-        "val_dir": "act_solar_f1881+b1524+t190/validation/",
-        "test_dir": "act_solar_f1881+b1524+t190/test/",
-        "test_gt": "/scratch/po21/jz1585/Label_noise/Data/act_solar_f1881+b1524+t190/test-2/test/",
+        "data_dir": "",
+        "train_dir": "",
+        "cam_dir": "",
+        "val_dir": "",
+        "test_dir": "",
+        "test_gt": "",
         "image_size": 256
     },
     "MODEL": {
@@ -14,9 +14,9 @@
         "checkpoint_path": "None"
     },
     "TRAIN": {
-        "Y_path": "/scratch/po21/jz1585/Label_noise/UALT_1/Uncertany/checkpoint/act/20220530202615/best-model_epoch-450_mae-inf.pth",
-        "Bayes_label_path": "/scratch/po21/jz1585/Label_noise/UALT_1/Uncertany/result/act/20220530202615/train/y/",
-        "Transition_path": "/scratch/po21/jz1585/Label_noise/UALT_1/trans2/result/act/20220609155012/train/best-model_epoch-290_mae-inf.pth/",
+        "Y_path": "",
+        "Bayes_label_path": "",
+        "Transition_path": "",
         "batch_size": 8,
         "lr": 0.0001,
         "rgb": 1,
