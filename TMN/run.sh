@@ -12,11 +12,9 @@
 
 module load cuda/10.1
 module load cudnn/7.6.5-cuda10.1 
-source /home/549/jz1585/.miniconda3/etc/profile.d/conda.sh
 conda init bash
 conda activate torch
 
 
-cd /scratch/po21/jz1585/Label_noise/UALT_1/UALT/
 python predict.py --config_path act_config.json
 #python train.py --config_path act_config.json
