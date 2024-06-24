@@ -72,7 +72,6 @@ if __name__ == '__main__':
     if not os.path.exists(save_dir_mask):
         os.mkdir(save_dir_mask)
         os.mkdir(save_dir_y)
-        print('!!!!!!!!!!!!!!!!!!!')
 
     for image_name in image_list:
         inp_img = cv2.imread(os.path.join(test_img, image_name)).astype('float32')
@@ -97,10 +96,4 @@ if __name__ == '__main__':
 
         pre = mean_y[0,1,:,:].cpu().detach().numpy()
         var = var_y[0,1,:,:].cpu().detach().numpy()
-
-        #fm = os.path.splitext(image_name)[0]+'.npy'
-        #np.save(os.path.join(save_dir_mask, fm),var)
-        #savemat(os.path.join(save_dir_mask,fm), {'var':var})
-        cv2.imwrite(os.path.join(save_dir_mask, image_name), var*255)
-        cv2.imwrite(os.path.join(save_dir_y, image_name), pre*255)
 
