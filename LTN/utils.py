@@ -71,47 +71,12 @@ def model_val(model,val_dataloader,criterion, ep, writer, device, config):
 
             tot_loss += loss.item()
 
-            mask_img = pred_masks.cpu().numpy()
-            mask = mask_img[:,1,:,:]
-            mask[mask>=0.5] = 1
-            mask[mask<0.5] = 0
-            gts = gt_masks[:,:,:].cpu().numpy()
-            
-            for  i in range(len(inp_imgs)):
-                gt =  gts[i,:,:]
-                mask.astype(np.float)
-                gt.astype(np.float)
-                tp_tf += np.sum(mask == gt)
-                tp += np.multiply(mask, gt).sum()
-                pred_true += np.sum(mask)
-                gt_true += np.sum(gt)
             
 
     avg_loss = tot_loss / batch_idx
-    accuracy = tp_tf / (len(val_dataloader) *img_size * img_size)
-    precision = tp / (pred_true + 1e-5)
-    recall = tp / (gt_true + 1e-5)
-    F = 2./(1./precision + 1./recall)
 
     writer.add_scalar('Val/loss', avg_loss, ep)
-    writer.add_scalar('Val/accuracy', accuracy, ep)
-    writer.add_scalar('Val/precision', precision, ep)
-    writer.add_scalar('Val/recall', recall, ep)
-    writer.add_scalar('Val/F', F, ep)
-
-    
-    writer.add_image('val/input', inp_imgs[4,:,:,:].squeeze(0), ep)
-    writer.add_image('val/output', pred_masks[4,1,:,:].unsqueeze(0), ep)
-    writer.add_image('val/gt', gt_masks[4,:,:].unsqueeze(0), ep)
-
-
-    print('val :: ACC : {:.4f}\tPRE : {:.4f}\tREC : {:.4f} \tF : {:.4f} \tAVG-LOSS : {:.4f}\n'.format(
-                                                                                            accuracy,
-                                                                                            precision,
-                                                                                            recall,
-                                                                                            F,
-                                                                                            avg_loss))
-
+   
     return avg_loss
 
 
