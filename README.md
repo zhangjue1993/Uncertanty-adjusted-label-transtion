@@ -1,17 +1,6 @@
 # Weakly Supervised Solar Panel Mapping via Uncertainty Adjusted Label Transition in Aerial Images
 Source code for "**Weakly Supervised Solar Panel Mapping via Uncertainty Adjusted Label Transition in Aerial Images
-**", accepted in IEEE TIP. The paper's PDF can be found in [Here](https://ieeexplore.ieee.org/abstract/document/10351041/).
-
-
-![image](https://github.com/zhangjue1993/torch--SP-RAN-Self-paced-Residual-Aggregated-Network/blob/main/Flowchart.png)
-
-## Prerequisites
-### environment
-  - Windows 10
-  - Torch 1.12.0
-  - CUDA 11.6.0
-  - Python 3.7.13
-  - Opencv 3.4.2
+**", accepted in IEEE TIP. The paper's PDF can be found [Here](https://ieeexplore.ieee.org/abstract/document/10351041/).
 
 ### data sets
 GoogleEarth Static Map API
@@ -19,12 +8,19 @@ GoogleEarth Static Map API
 # Parameters
 Please refer to ```act_config.json```
 
-## Training
-### 1st training stage
-GradCAM
+## The generation of Pseudo labels 
+Use torchCAM to implement grancam. The code can be found [Here](https://github.com/frgfm/torch-cam).
 
-### 2st training stage
- Setting the training data to the proper root as follows:
+## Training
+UALT consists of three part Unertainty Estimation Network, Label Transition Network and Target Mapping Network, which are trained in sequence. 
+
+Setting the training data to the proper root as follows:
+
+
+### Unertainty Estimation Network 
+run ```python train.py --config_path act_config.json``` in folder UEN. 
+For UEN, set the training directory as follows:
+
 ```
 -- data -- train -- fore
 
@@ -39,6 +35,9 @@ GradCAM
                  -- seg -- img
                  
                         -- gt
+
+### Label Transition Network
+
 ```
 set ```self-pace``` to ```False``` in ```act_config.json```. 
 
