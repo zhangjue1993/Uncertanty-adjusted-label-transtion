@@ -47,44 +47,6 @@ class RFA(nn.Module):
         c5 = self.conv3(c4)
         return c5
 
-class RAN_test(nn.Module):
-    def __init__(self):
-        super(RAN_test, self).__init__()
-
-        
-        self.smooth1 = Conv3(3, 32)
-        self.smooth2 = Conv3(32, 64)
-        self.smooth3 = Conv3(64, 128)
-        self.smooth4 = Conv3(128, 128)
-        self.smooth5 = Conv3(128, 64)
-        self.smooth6 = Conv3(64, 32)
-        self.conv = nn.Conv2d(32, 2, kernel_size=1, stride=1, padding=0, bias=False)
-
-        self.softmax = nn.Softmax(dim=1)
-
-    def forward(self, x):
-
-        p1 = self.smooth1(x)
-        p2 = self.smooth2(p1)
-        p3 = self.smooth3(p2)
-        p4 = self.smooth4(p3)
-        p5 = self.smooth5(p4)
-        p6 = self.smooth6(p5)
-        
-        p7 = self.conv(p6)
-
-        out_logits = p7
-        out  = self.softmax(p7)
-
-        # sigma = self.sig_conv3(self.sig_conv2(self.sig_conv1(p1)))
-        # out_10 = torch.zeros([10, sigma.size()[0], 1, 256, 256]).cuda()
-        # for i in range(10):
-        #     epsilon = torch.normal(torch.zeros_like(sigma), 1)
-        #     out_10[i,:,:,:,:] = seg_out + sigma*epsilon
-        # seg_out = torch.mean(out_10, axis = 0, keepdim = False)
-        return out_logits,out
-
-
 
 
 class RAN_un(nn.Module):
