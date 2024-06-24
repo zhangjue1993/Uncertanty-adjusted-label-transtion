@@ -92,7 +92,6 @@ if __name__ == '__main__':
     model = RAN_un().to(device)
     
     summary(model, (3, 256, 256))
-    model.load_state_dict(torch.load('./checkpoint/act/20220823124054/best-model_epoch-048_mae-inf.pth'))
     #criterion1 =  ModelLossSemsegGatedCRF().to(device)
     #print("model model model ")
     criterion1 = WCE().to(device)
