@@ -35,6 +35,7 @@ For UEN, set the training directory as follows:
                  -- seg -- img
                  
                         -- gt
+```
 
 ### Label Transition Network
 
