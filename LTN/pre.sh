@@ -1,1 +1,0 @@
-python predict.py --config_path act_config_step2.json
