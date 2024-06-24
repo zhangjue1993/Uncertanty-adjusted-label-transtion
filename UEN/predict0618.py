@@ -63,8 +63,7 @@ if __name__ == '__main__':
 
     model_path =config.TEST.model_path
     model = RAN_un().to(device)
-    model.load_state_dict(torch.load(model_path))
-
+    
     image_list = os.listdir(test_img)
     save_dir = config.TEST.save_dir
     save_dir_mask = os.path.join(save_dir, 'mask')
