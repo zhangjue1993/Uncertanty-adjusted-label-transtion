@@ -11,14 +11,6 @@ from torchsummary import summary
 BATCH_SIZE = 1
 R = 10
 
-
-cfg = {
-    'VGG11': [64, 'M', 128, 'M', 256, 256, 'M', 512, 512, 'M', 512, 512],
-    'VGG13': [64, 64, 'M', 128, 128, 'M', 256, 256, 'M', 512, 512, 'M', 512, 512, 'M'],
-    'VGG16': [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 'M', 512, 512, 512, 'M', 512, 512, 512],
-    'VGG19': [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 256, 'M', 512, 512, 512, 512, 'M', 512, 512, 512, 512, 'M']
-}
-
 def Conv3(in_channels, out_channels):
     return nn.Sequential(nn.Conv2d(in_channels, out_channels, kernel_size=3, 
                      stride=1, padding=1, bias=False),nn.ReLU(),nn.Dropout2d(p=0.2))
