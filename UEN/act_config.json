@@ -36,7 +36,7 @@
         "save_dir": "./result/act/20220613172450/test"
     },
     "TEST": {
-        "model_path": "./checkpoint/act\\20220822220542\\best-model_epoch-111_mae-inf.pth",
+        "model_path": "./checkpoint/act\\20220822220542\\",
         "save_dir": "./result/act\\20220822220542\\test"
     }
 }
