@@ -55,30 +55,6 @@ def adjust_learning_rate(optimizer, decay_rate=.9):
         param_group['lr'] = param_group['lr'] * decay_rate
 
 
-def trans(image,imsize, rand_seed):
-    # print(image.shape)
-    # image = image.permute(2,1,0)
-
-    print(image.shape)
-    target_control_points = torch.Tensor(list(itertools.product(
-        torch.arange(-1.0, 1.00001, 2.0 / 4),
-        torch.arange(-1.0, 1.00001, 2.0 / 4),
-    )))
-    source_control_points = target_control_points+rand_seed
-
-    # print('initialize tps')
-    tps = TPSGridGen(imsize, imsize, target_control_points)
-    if imsize<256:
-        # print(1111111111)
-        image = image.permute(1,0,2,3)
-        
-    batchsize = image.shape[0]
-    source_coordinate = tps(Variable(torch.unsqueeze(source_control_points, 0)))
-    grid = source_coordinate.view(1, imsize, imsize, 2).cuda()
-    grid = grid.repeat(batchsize,1,1,1)
-    target_image = grid_sample(image, grid)
-    return target_image
-
 def model_val(model,val_dataloader,criterion, ep, writer, device, config):
     
     model.eval()
