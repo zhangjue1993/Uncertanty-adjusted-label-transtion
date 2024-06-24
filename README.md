@@ -2,20 +2,15 @@
 Source code for "**Weakly Supervised Solar Panel Mapping via Uncertainty Adjusted Label Transition in Aerial Images
 **", accepted in IEEE TIP. The paper's PDF can be found [Here](https://ieeexplore.ieee.org/abstract/document/10351041/).
 
-### data sets
-GoogleEarth Static Map API
 
-# Parameters
-Please refer to ```act_config.json```
+## Parameters
+Please refer to ```act_config.json``` in each folder
 
 ## The generation of Pseudo labels 
-Use torchCAM to implement grancam. The code can be found [Here](https://github.com/frgfm/torch-cam).
+Use torchCAM to implement grandcam. The code can be found [Here](https://github.com/frgfm/torch-cam).
 
 ## Training
-UALT consists of three part Unertainty Estimation Network, Label Transition Network and Target Mapping Network, which are trained in sequence. 
-
-Setting the training data to the proper root as follows:
-
+UALT consists of three parts: Uncertainty Estimation Network, Label Transition Network, and Target Mapping Network, which are trained in sequence. 
 
 ### Unertainty Estimation Network 
 run ```python train.py --config_path act_config.json``` in folder UEN. 
@@ -36,6 +31,7 @@ For UEN, set the training directory as follows:
                  
                         -- gt
 ```
+Generate **Bayes_optimal_label** and **Train_sigma_dir** for LTN training
 
 ## Testing
 
@@ -45,6 +41,18 @@ For UEN, set the training directory as follows:
 
 Run ```python train.py --config_path act_config.json```.
 
+For LTN, set the training directory as follows:
+
+```
+-- data -- train -- fore
+
+                 -- back
+                 
+                 -- Pseudo labels
+
+                 -- Bayes_optimal_label
+
+                 -- Train_sigma_dir
 
 
 
