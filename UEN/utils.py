@@ -89,86 +89,6 @@ def model_val(model,val_dataloader,criterion, ep, writer, device, config):
     return avg_loss
 
 
-def model_train(model, train_dataloader, val_dataloader, criterion1, criterion2,criterion3,optimizer, scheduler, writer, model_path, device, config,CRFconfig):
-    k = 0
-    best_test_mae = float('inf')
-    epoch = config['TRAIN']['epoch_num']
-    log_interval = config['TRAIN']['log_interval']
-    val_interval = config['VAL']['val_interval']
-    crf_w = config['TRAIN']['crf_w']
-    wce = config['TRAIN']['wce']
-
-
-    for ep in range(epoch):
-
-        model.train()
-
-        #torch.autograd.set_detect_anomaly(True)
-
-        #print(epoch)
-        for batch_idx, (inp_imgs, gt_masks) in enumerate(train_dataloader):
-
-            inp_imgs = inp_imgs.to(device)
-            gt_masks = gt_masks.to(device)
-            #print('input_img:',inp_imgs.shape)
-            optimizer.zero_grad()
-            pred_masks= model(inp_imgs)
-
-            #inp = inp_imgs.clone()
-            #trans_inp =  trans(inp, inp.shape[3], rand_seed)
-            #trans_pred = model(trans_inp)
-            
-            #trans_mask = trans(pred_masks[:,1,:,:].unsqueeze(1), pred_masks.shape[3], rand_seed)
-            
-
-            #print(pred_masks.size())
-            loss1 = criterion1(pred_masks, gt_masks)
-            #loss2 = 0#criterion2(pred_masks[:,1,:,:].unsqueeze(1), CRFconfig,inp_imgs)
-            #loss2 = criterion2(pred_masks, CRFconfig,inp_imgs)
-            #loss3 = criterion4(trans_pred[:,1,:,:].unsqueeze(1), trans_mask)
-            loss = loss1#+crf_w*loss2
-            
-
-            #with torch.autograd.detect_anomaly():
-            loss.backward()
-
-            optimizer.step()
-
-            if batch_idx % log_interval == 0:
-                k +=1
-                print('TRAIN :: Epoch : {}\tBatch : {}/{} ({:.2f}%)\t\tTot Loss : {:.4f}'
-                        .format(ep + 1, batch_idx + 1, len(train_dataloader), (batch_idx + 1) * 100 / len(train_dataloader),loss.item()))
-                writer.add_scalar('Train/loss', loss.item(), k)
-                #writer.add_scalar('Train/celoss', loss1.item(), k)
-                #writer.add_scalar('Train/crfloss', loss2, k)
-                #writer.add_scalar('Train/tfsloss', loss3.item(), k)
-                writer.add_image('Train/input', torch.squeeze(inp_imgs[1,:,:,:]), k)
-                #writer.add_image('Train/logvar', logvar[1,0,:,:].unsqueeze(0), k)
-                #_image('Train/trans_inp', torch.squeeze(trans_inp[1,:,:,:]), k)
-                writer.add_image('Train/output', pred_masks[1,1,:,:].unsqueeze(0), k)
-                # writer.add_image('Train/trans_out', trans_mask[1,0,:,:].unsqueeze(0), k)
-                # writer.add_image('Train/trans_pred', trans_pred[1,1,:,:].unsqueeze(0), k)
-
-                writer.add_image('Train/gt', gt_masks[1,:,:].unsqueeze(0), k)
-                writer.add_scalar('Train/lr', optimizer.param_groups[0]['lr'], k)
-
-
-        if ep>4 and optimizer.param_groups[0]['lr']>1e-5:
-            scheduler.step()
-            # Validation
-        if ep % val_interval == 0:
-            model.eval()
-            val_mae = model_val(model,val_dataloader,criterion3, ep, writer, device, config)
-
-            # Save the best model
-            # if val_mae < best_test_mae:
-            #     best_test_mae = val_mae
-            #     torch.save(model.state_dict(), os.path.join(model_path, 'best-model_epoch-{:03}_mae-{:.4f}.pth'.
-            #                 format(ep, best_test_mae)))
-        if ep % 5 == 0 and ep>1:
-            torch.save(model.state_dict(), os.path.join(model_path, 'best-model_epoch-{:03}_mae-{:.4f}.pth'.
-                            format(ep, best_test_mae)))
-
 
 def model_train_com(model, train_dataloader, val_dataloader, criterion1, criterion2,criterion3,optimizer, scheduler, writer, model_path, device, config,CRFconfig):
     k = 0
@@ -179,8 +99,6 @@ def model_train_com(model, train_dataloader, val_dataloader, criterion1, criteri
     crf_w = config['TRAIN']['crf_w']
     wce = config['TRAIN']['wce']
     sigma_weight = config['TRAIN']['sigma_weight']
-
-
 
     for ep in range(epoch):
 
@@ -235,19 +153,7 @@ def model_train_com(model, train_dataloader, val_dataloader, criterion1, criteri
                 print('TRAIN :: Epoch : {}\tBatch : {}/{} ({:.2f}%)\t\tTot Loss : {:.4f}'
                         .format(ep + 1, batch_idx + 1, len(train_dataloader), (batch_idx + 1) * 100 / len(train_dataloader),loss.item()))
                 writer.add_scalar('Train/loss', loss.item(), k)
-                writer.add_scalar('Train/celoss', loss1.item(), k)
-                #writer.add_scalar('Train/crfloss', loss2, k)
-                #writer.add_scalar('Train/tfsloss', loss3.item(), k)
-                
-                writer.add_image('Train/logvar', var_y[1,1,:,:].unsqueeze(0)*3, k)
-                #_image('Train/trans_inp', torch.squeeze(trans_inp[1,:,:,:]), k)
-                writer.add_image('Train/output', mean_y[1,1,:,:].unsqueeze(0), k)
-                #writer.add_image('Train/output_out', pred_out[1,1,:,:].unsqueeze(0), k)
-                # writer.add_image('Train/trans_out', trans_mask[1,0,:,:].unsqueeze(0), k)
-                # writer.add_image('Train/trans_pred', trans_pred[1,1,:,:].unsqueeze(0), k)
-                writer.add_image('Train/input', torch.squeeze(inp_imgs[1,:,:,:]), k)
-                writer.add_image('Train/gt', gt_masks[1,:,:].unsqueeze(0), k)
-                writer.add_scalar('Train/lr', optimizer.param_groups[0]['lr'], k)
+
 
 
         if optimizer.param_groups[0]['lr']>1e-5:
