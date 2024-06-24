@@ -1,9 +1,7 @@
 import torch
-import torchvision.models as v_models
 import torch.nn as nn
 import torch.nn.functional as F
 from math import floor
-from torchvision.ops import roi_pool, RoIPool
 from torchsummary import summary
 
 #from data_pre import myDataSet
