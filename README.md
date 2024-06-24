@@ -37,19 +37,17 @@ For UEN, set the training directory as follows:
                         -- gt
 ```
 
-### Label Transition Network
+## Testing
 
-```
-set ```self-pace``` to ```False``` in ```act_config.json```. 
+```python predict0618.py --config_path act_config.json```
+
+### Label Transition Network
 
 Run ```python train.py --config_path act_config.json```.
 
-### 3nd training stage
 
-Set ```self-pace``` to ```True``` in ```act_config.json```. Set the label update dir in ```act_config.json```. Run  ```python train.py --config_path act_config.json```.
 
-## Testing
-```python predict.py --config_path act_config.json```
+
 
 **Noting** that the results in our paper do not adopt any post-process including CRF.
 
