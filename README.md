@@ -7,7 +7,7 @@ Source code for "**Weakly Supervised Solar Panel Mapping via Uncertainty Adjuste
 Please refer to ```act_config.json``` in each folder
 
 ## The generation of Pseudo labels 
-Use torchCAM to implement grandcam. The code can be found [Here](https://github.com/frgfm/torch-cam).
+Use torchCAM to implement gradcam. The code can be found [Here](https://github.com/frgfm/torch-cam).
 
 ## Training
 UALT consists of three parts: Uncertainty Estimation Network, Label Transition Network, and Target Mapping Network, which are trained in sequence. 
